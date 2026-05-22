@@ -408,7 +408,7 @@ export const getSaleInvoiceFullDetail = async (docNo, signal) => {
 
 
 
-// 🔥 Stock Ageing Report (CSA based)
+// Stock Ageing Report (CSA based)
 export const getStockAgeingReport = async (fromDate, toDate, csa_id) => {
   const res = await axios.post(
     `${apiUrl2}/retail/stock-ageing-report`,
