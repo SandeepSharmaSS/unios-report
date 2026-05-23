@@ -1,4 +1,4 @@
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import AppRoutes from "./routes/AppRoutes";
 import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "./context/ThemeContext";
@@ -6,13 +6,13 @@ import { ThemeProvider } from "./context/ThemeContext";
 function App() {
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <ThemeProvider>
         <AuthProvider>
           <AppRoutes />
         </AuthProvider>
       </ThemeProvider>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
