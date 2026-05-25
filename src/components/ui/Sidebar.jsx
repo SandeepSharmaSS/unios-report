@@ -17,6 +17,7 @@ import {
   ChevronDown,
   X,
   FolderOpen,
+  RotateCwIcon,
 } from "lucide-react";
 
 import {
@@ -362,6 +363,14 @@ export default function Sidebar({
               label="Unloading Bills"
               setOpen={setOpen}
             />
+
+            <MemoNavItem 
+            to="/reopens/SaleInvoiceBills"
+            icon={<RotateCwIcon size={17}/>}
+            label="Sale Invoice Bills"
+            setOpen={setOpen}
+            />
+
           </MemoDropdown>
 
         </nav>

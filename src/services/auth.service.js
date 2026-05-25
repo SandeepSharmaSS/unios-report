@@ -635,3 +635,47 @@ export const reopenBills = async (
 
   return res.data;
 };
+
+
+// Sale Invoice Search API
+export const getSaleInvoiceSearch = async (
+  searchString = "",
+  csaId,
+  signal
+) => {
+
+  const res = await axios.post(
+    `${apiUrl2}/erp-aditya/sale_invoice_serach`,
+    {
+      SearchString: searchString,
+      csa_id: csaId,
+    },
+    {
+      headers: getHeaders(),
+      signal,
+    }
+  );
+
+  return res.data;
+};
+
+
+//Reopen Sales Bill API
+export const reopenSalesBill = async (
+  docNo,
+  type = "SalesBill"
+) => {
+
+  const res = await axios.post(
+    `${apiUrl2}/support/reopen-bills`,
+    {
+      DocNo: docNo,
+      type,
+    },
+    {
+      headers: getHeaders(),
+    }
+  );
+
+  return res.data;
+};
