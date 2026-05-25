@@ -767,3 +767,47 @@ export const reopenSaleReturn = async (
 
   return res.data;
 };
+
+
+//STN Search API
+export const getSTNSearch = async (
+  searchString = "",
+  csaId,
+  signal
+) => {
+
+  const res = await axios.post(
+    `${apiUrl2}/warehouse/search-stn`,
+    {
+      SearchString: searchString,
+      csa_id: csaId,
+    },
+    {
+      headers: getHeaders(),
+      signal,
+    }
+  );
+
+  return res.data;
+};
+
+
+//Reopen STN API
+export const reopenSTN = async (
+  docNo,
+  type = "STN"
+) => {
+
+  const res = await axios.post(
+    `${apiUrl2}/support/reopen-bills`,
+    {
+      DocNo: docNo,
+      type,
+    },
+    {
+      headers: getHeaders(),
+    }
+  );
+
+  return res.data;
+};
