@@ -709,7 +709,51 @@ export const reopenSaleOrder = async (
   docNo,
   type = "SalOrder"
 ) => {
-  
+
+  const res = await axios.post(
+    `${apiUrl2}/support/reopen-bills`,
+    {
+      DocNo: docNo,
+      type,
+    },
+    {
+      headers: getHeaders(),
+    }
+  );
+
+  return res.data;
+};
+
+
+// Sale Return search API
+export const getSaleReturnSearch = async (
+  searchString = "",
+  csaId,
+  signal
+) => {
+
+  const res = await axios.post(
+    `${apiUrl2}/erp-aditya/sale-return-search`,
+    {
+      SearchString: searchString,
+      csa_id: csaId,
+    },
+    {
+      headers: getHeaders(),
+      signal,
+    }
+  );
+
+  return res.data;
+};
+
+
+//Reopen Sale Return API
+export const reopenSaleReturn = async (
+  docNo,
+  type = "Sale_Return"
+) => {
+
   const res = await axios.post(
     `${apiUrl2}/support/reopen-bills`,
     {
