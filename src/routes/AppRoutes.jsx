@@ -17,6 +17,7 @@ import SaleInvoiceBills from "../pages/reopens/SaleInvoiceBills";
 import SaleOrderBills from "../pages/reopens/SaleOrderBills";
 import SaleReturnBills from "../pages/reopens/SaleReturnBills";
 import StnInvoiceBills from "../pages/reopens/StnInvoiceBills";
+import PurchaseReturnBills from "../pages/reopens/PurchaseReturnBills";
 
 import MainLayout from "../layouts/MainLayout";
 const ProtectedRoute = () => {
@@ -57,6 +58,7 @@ export default function AppRoutes() {
         <Route path="/reopens/SaleOrderBills" element={<SaleOrderBills/>}/>
         <Route path="/reopens/SaleReturnBills" element={<SaleReturnBills/>}/>
         <Route path="/reopens/StnInvoiceBills" element={<StnInvoiceBills/>}/>
+        <Route path="/reopens/PurchaseReturnBills" element={<PurchaseReturnBills/>}/>
       </Route>
 
       {/* ===== FALLBACK ===== */}

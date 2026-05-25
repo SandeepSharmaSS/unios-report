@@ -21,6 +21,7 @@ import {
   RotateCcwSquare,
   RotateCcwSquareIcon,
   Rotate3DIcon,
+  RocketIcon,
 } from "lucide-react";
 
 import {
@@ -392,6 +393,13 @@ export default function Sidebar({
             to="/reopens/StnInvoiceBills"
             icon={<Rotate3DIcon size={17}/>}
             label="STN Bills"
+            setOpen={setOpen}
+            />
+
+            <MemoNavItem
+            to="/reopens/PurchaseReturnBills"
+            icon={<RocketIcon size={17}/>}
+            label="Purchase Return Bills"
             setOpen={setOpen}
             />
 

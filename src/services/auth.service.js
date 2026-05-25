@@ -811,3 +811,48 @@ export const reopenSTN = async (
 
   return res.data;
 };
+
+
+//Purchase Return Search API
+export const getPurchaseReturnSearch = async (
+  searchString = "",
+  csaId,
+  signal
+) => {
+
+  const res = await axios.post(
+    `${apiUrl2}/erp-aditya/purchase-return-search`,
+    {
+      SearchString: searchString,
+      csa_id: csaId,
+    },
+    {
+      headers: getHeaders(),
+      signal,
+    }
+  );
+
+  return res.data;
+};
+
+
+//Reopen Purchase Return API
+export const reopenPurchaseReturn = async (
+  docNo,
+  type = "Purchase_Return"
+) => {
+
+  const res = await axios.post(
+    `${apiUrl2}/support/reopen-bills`,
+    {
+      DocNo: docNo,
+      type,
+    },
+    {
+      headers: getHeaders(),
+    }
+  );
+
+  return res.data;
+};
+
