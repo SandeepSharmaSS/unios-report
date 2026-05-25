@@ -403,6 +403,13 @@ export default function Sidebar({
             setOpen={setOpen}
             />
 
+            <MemoNavItem
+            to="/reopens/PurchaseOrderBills"
+            icon={<RotateCcwSquareIcon size={17}/>}
+            label="Purchase Order Bills"
+            setOpen={setOpen}
+            />
+
           </MemoDropdown>
 
         </nav>

@@ -856,3 +856,47 @@ export const reopenPurchaseReturn = async (
   return res.data;
 };
 
+
+
+//Purchase Return Search API
+export const getPurchaseOrderList = async (
+  searchString = "",
+  csaId,
+  signal
+) => {
+
+  const res = await axios.post(
+    `${apiUrl2}/wh-pur/po-list`,
+    {
+      SearchString: searchString,
+      csa_id: csaId,
+    },
+    {
+      headers: getHeaders(),
+      signal,
+    }
+  );
+
+  return res.data;
+};
+
+
+//Reopen Purchase Order API
+export const reopenPurchaseOrder = async (
+  docNo,
+  type = "PurOrder"
+) => {
+
+  const res = await axios.post(
+    `${apiUrl2}/support/reopen-bills`,
+    {
+      DocNo: docNo,
+      type,
+    },
+    {
+      headers: getHeaders(),
+    }
+  );
+
+  return res.data;
+};
