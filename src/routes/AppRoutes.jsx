@@ -18,7 +18,7 @@ import SaleOrderBills from "../pages/reopens/SaleOrderBills";
 import SaleReturnBills from "../pages/reopens/SaleReturnBills";
 import StnInvoiceBills from "../pages/reopens/StnInvoiceBills";
 import PurchaseReturnBills from "../pages/reopens/PurchaseReturnBills";
-import PurchaseOrderBills from "../pages/reopens/PurchaseOrder";
+import PurchaseOrderBills from "../pages/reopens/PurchaseOrderBills";
 
 import MainLayout from "../layouts/MainLayout";
 const ProtectedRoute = () => {

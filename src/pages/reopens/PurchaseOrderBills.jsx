@@ -107,9 +107,13 @@ export default function PurchaseOrderBills() {
           data = data.filter(
             (item) => {
 
-              const invoice =
-                item?.Invoice_No
-                  ?.toLowerCase() || "";
+const invoice =
+(
+  item?.PurOrd_No ||
+  item?.Invoice_No ||
+  item?.PO_No ||
+  ""
+).toLowerCase();
 
               const vendor =
                 item?.Customer_Name
@@ -176,7 +180,7 @@ export default function PurchaseOrderBills() {
         const res =
           await reopenPurchaseOrder(
             docNo,
-            "Purchase_Order"
+            "PurOrder"
           );
 
         if (
@@ -744,9 +748,10 @@ export default function PurchaseOrderBills() {
                           break-all
                         "
                       >
-                        {item.Invoice_No ||
-                          item.PO_No ||
-                          "PO"}
+                      {item.PurOrd_No ||
+                        item.Invoice_No ||
+                        item.PO_No ||
+                        "PO"}
                       </h2>
 
                       <p
@@ -756,9 +761,10 @@ export default function PurchaseOrderBills() {
                           mt-1
                         "
                       >
-                        {item.date ||
-                          item.Date ||
-                          "N/A"}
+{item.PurOrd_Date ||
+  item.date ||
+  item.Date ||
+  "N/A"}
                       </p>
                     </div>
 
@@ -947,15 +953,18 @@ export default function PurchaseOrderBills() {
 
                   <button
                     onClick={() =>
-                      handleReopen(
-                        item.Invoice_No ||
-                        item.PO_No
-                      )
+handleReopen(
+  item.PurOrd_No ||
+  item.Invoice_No ||
+  item.PO_No
+)
                     }
                     disabled={
-                      reopenLoading ===
-                        item.Invoice_No ||
-                      !canReopen
+ reopenLoading ===
+(
+  item.PurOrd_No ||
+  item.Invoice_No
+)
                     }
                     className={`
                       w-full
