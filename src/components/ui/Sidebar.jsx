@@ -18,6 +18,7 @@ import {
   X,
   FolderOpen,
   RotateCwIcon,
+  RotateCcwSquare,
 } from "lucide-react";
 
 import {
@@ -368,6 +369,13 @@ export default function Sidebar({
             to="/reopens/SaleInvoiceBills"
             icon={<RotateCwIcon size={17}/>}
             label="Sale Invoice Bills"
+            setOpen={setOpen}
+            />
+
+            <MemoNavItem
+            to="/reopens/SaleOrderBills"
+            icon={<RotateCcwSquare size={17}/>}
+            label="Sale Order Bills"
             setOpen={setOpen}
             />
 

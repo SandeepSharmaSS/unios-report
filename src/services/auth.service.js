@@ -679,3 +679,47 @@ export const reopenSalesBill = async (
 
   return res.data;
 };
+
+
+// Sale Order Search API
+export const getSaleOrderSearch = async (
+  searchString = "",
+  csaId,
+  signal
+) => {
+
+  const res = await axios.post(
+    `${apiUrl2}/warehouse/salord-search`,
+    {
+      SearchString: searchString,
+      csa_id: csaId,
+    },
+    {
+      headers: getHeaders(),
+      signal,
+    }
+  );
+
+  return res.data;
+};
+
+
+//Reopen Sale Order API
+export const reopenSaleOrder = async (
+  docNo,
+  type = "SalOrder"
+) => {
+  
+  const res = await axios.post(
+    `${apiUrl2}/support/reopen-bills`,
+    {
+      DocNo: docNo,
+      type,
+    },
+    {
+      headers: getHeaders(),
+    }
+  );
+
+  return res.data;
+};
