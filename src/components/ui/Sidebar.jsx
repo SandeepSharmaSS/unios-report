@@ -14,23 +14,95 @@ import {
   TrendingUp,
   LogOut,
   ChevronRight,
+  ChevronDown,
   X,
-  Moon,
-  Sun,
+  FolderOpen,
 } from "lucide-react";
+
+import {
+  useState,
+  memo,
+  useMemo,
+  useCallback,
+} from "react";
 
 import { useAuth } from "../../context/AuthContext";
 
 import { useTheme } from "../../context/ThemeContext";
 
-export default function Sidebar({ open, setOpen }) {
+export default function Sidebar({
+  open,
+  setOpen,
+}) {
 
-  const { logout } = useAuth(); 
+  const { logout } = useAuth();
 
-  const {
-    theme,
-    toggleTheme,
-  } = useTheme();
+  const { theme } = useTheme();
+
+  // 🔥 smoother dropdown state
+  const [
+    openSections,
+    setOpenSections,
+  ] = useState({
+    inventory: true,
+    reports: true,
+    reopens: true,
+  });
+
+  // 🔥 optimized toggle
+  const toggleSection =
+    useCallback((key) => {
+
+      setOpenSections(
+        (prev) => ({
+          ...prev,
+          [key]:
+            !prev[key],
+        })
+      );
+    }, []);
+
+  // 🔥 sidebar classes
+  const sidebarClass =
+    useMemo(() => `
+      fixed md:static
+      top-0 left-0 z-50
+
+      h-dvh
+      w-[78%]
+      max-w-[280px]
+
+      bg-white
+      dark:bg-[#020617]
+
+      text-gray-800
+      dark:text-white
+
+      border-r
+      border-gray-200
+      dark:border-slate-800
+
+      shadow-2xl
+
+      transform-gpu
+      will-change-transform
+
+      ${open
+        ? "translate-x-0"
+        : "-translate-x-full"
+      }
+
+      md:translate-x-0
+
+      transition-transform
+      duration-200
+      ease-out
+
+      flex flex-col
+      overflow-hidden
+    `,
+      [open]
+    );
 
   return (
     <>
@@ -39,121 +111,93 @@ export default function Sidebar({ open, setOpen }) {
         <div
           className="
             fixed inset-0 z-40
-            bg-black/30 backdrop-blur-sm
+            bg-black/30
+            backdrop-blur-[2px]
+
             md:hidden
           "
-          onClick={() => setOpen(false)}
+          onClick={() =>
+            setOpen(false)
+          }
         />
       )}
 
       {/* SIDEBAR */}
       <aside
-        className={`
-          fixed md:static
-          top-0 left-0 z-50
-          h-full
-          w-[78%]
-          max-w-[270px]
-
-          bg-white
-          dark:bg-slate-950
-
-          text-gray-800
-          dark:text-white
-
-          shadow-2xl
-
-          border-r
-          border-gray-200
-          dark:border-slate-800
-
-          transform
-          ${open ? "translate-x-0" : "-translate-x-full"}
-          md:translate-x-0
-
-          transition-all duration-300 ease-out
-
-          flex flex-col
-          overflow-hidden
-        `}
+        className={
+          sidebarClass
+        }
       >
 
         {/* HEADER */}
         <div
           className="
-            px-5 pt-6 pb-5
+            px-5 pt-5 pb-4
 
             border-b
             border-gray-100
             dark:border-slate-800
 
-            bg-white
-            dark:bg-slate-950
+            shrink-0
           "
         >
 
           <div className="flex items-start justify-between">
 
-            <div>
+            <div className="flex items-center gap-3">
 
-              <div className="flex items-center gap-3">
+              <div
+                className="
+                  w-11 h-11
+                  rounded-2xl
 
-                <div
-                  className="
-                    w-11 h-11
-                    rounded-2xl
+                  bg-gradient-to-br
+                  from-blue-500
+                  to-indigo-600
 
-                    bg-gradient-to-br
-                    from-blue-500
-                    to-indigo-600
+                  flex items-center justify-center
 
-                    flex items-center justify-center
+                  text-white
 
-                    text-white
+                  shadow-lg
+                  shadow-blue-500/20
 
-                    shadow-lg
-                    shadow-blue-500/20
-                  "
-                >
-                  <LayoutDashboard size={22} />
-                </div>
-
-                <div>
-
-                  <h2
-                    className="
-                      text-lg
-                      font-black
-                      tracking-wide
-
-                      text-slate-800
-                      dark:text-white
-                    "
-                  >
-                    UniOS
-                  </h2>
-
-                  <p
-                    className="
-                      text-[11px]
-                      mt-0.5
-
-                      text-slate-400
-                      dark:text-slate-500
-                    "
-                  >
-                    Analytics Panel
-                  </p>
-
-                </div>
-
+                  shrink-0
+                "
+              >
+                <LayoutDashboard
+                  size={21}
+                />
               </div>
 
+              <div>
+
+                <h2
+                  className="
+                    text-lg
+                    font-black
+                    tracking-wide
+                  "
+                >
+                  UniOS
+                </h2>
+
+                <p
+                  className="
+                    text-[11px]
+                    text-slate-400
+                  "
+                >
+                  Analytics Panel
+                </p>
+              </div>
             </div>
 
-            {/* MOBILE CLOSE */}
+            {/* CLOSE */}
             <button
-              onClick={() => setOpen(false)}
+              onClick={() =>
+                setOpen(false)
+              }
               className="
                 md:hidden
 
@@ -165,20 +209,15 @@ export default function Sidebar({ open, setOpen }) {
 
                 flex items-center justify-center
 
-                text-gray-500
-                dark:text-slate-300
-
                 hover:bg-gray-200
                 dark:hover:bg-slate-700
 
-                transition
+                transition-colors
               "
             >
               <X size={16} />
             </button>
-
           </div>
-
         </div>
 
         {/* NAVIGATION */}
@@ -188,93 +227,142 @@ export default function Sidebar({ open, setOpen }) {
             overflow-y-auto
 
             px-3 py-4
-            space-y-1.5
 
-            bg-white
-            dark:bg-slate-950
+            space-y-2
+
+            scrollbar-thin
           "
         >
 
-          <NavItem
+          {/* DASHBOARD */}
+          <MemoNavItem
             to="/home"
             icon={<LayoutDashboard size={18} />}
             label="Dashboard"
             setOpen={setOpen}
           />
 
-          <SectionTitle title="Inventory" />
+          {/* INVENTORY */}
+          <MemoDropdown
+            title="Inventory"
+            icon={<Boxes size={16} />}
+            open={
+              openSections.inventory
+            }
+            onToggle={() =>
+              toggleSection(
+                "inventory"
+              )
+            }
+          >
 
-          <NavItem
-            to="/reports/stock"
-            icon={<Boxes size={18} />}
-            label="Stock Analysis"
-            setOpen={setOpen}
-          />
+            <MemoNavItem
+              to="/reports/stock"
+              icon={<Boxes size={17} />}
+              label="Stock Analysis"
+              setOpen={setOpen}
+            />
 
-          <NavItem
-            to="/reports/ageing"
-            icon={<Hourglass size={18} />}
-            label="Stock Ageing"
-            setOpen={setOpen}
-          />
+            <MemoNavItem
+              to="/reports/ageing"
+              icon={<Hourglass size={17} />}
+              label="Stock Ageing"
+              setOpen={setOpen}
+            />
 
-          <NavItem
-            to="/reports/ledger"
-            icon={<BookOpen size={18} />}
-            label="Product Ledger"
-            setOpen={setOpen}
-          />
+            <MemoNavItem
+              to="/reports/ledger"
+              icon={<BookOpen size={17} />}
+              label="Product Ledger"
+              setOpen={setOpen}
+            />
 
-          <NavItem
-            to="/reports/NonMoving"
-            icon={<PackageSearch size={18} />}
-            label="Non Moving Stock"
-            setOpen={setOpen}
-          />
+            <MemoNavItem
+              to="/reports/NonMoving"
+              icon={<PackageSearch size={17} />}
+              label="Non Moving Stock"
+              setOpen={setOpen}
+            />
+          </MemoDropdown>
 
-          <SectionTitle title="Reports" />
+          {/* REPORTS */}
+          <MemoDropdown
+            title="Reports"
+            icon={<ReceiptText size={16} />}
+            open={
+              openSections.reports
+            }
+            onToggle={() =>
+              toggleSection(
+                "reports"
+              )
+            }
+          >
 
-          <NavItem
-            to="/reports/SaleReport"
-            icon={<ReceiptText size={18} />}
-            label="Sale Report"
-            setOpen={setOpen}
-          />
+            <MemoNavItem
+              to="/reports/SaleReport"
+              icon={<ReceiptText size={17} />}
+              label="Sale Report"
+              setOpen={setOpen}
+            />
 
-          <NavItem
-            to="/reports/STNReport"
-            icon={<Truck size={18} />}
-            label="STN Report"
-            setOpen={setOpen}
-          />
+            <MemoNavItem
+              to="/reports/STNReport"
+              icon={<Truck size={17} />}
+              label="STN Report"
+              setOpen={setOpen}
+            />
 
-          <NavItem
-            to="/reports/SaleReturnReport"
-            icon={<RotateCcw size={18} />}
-            label="Sale Return"
-            setOpen={setOpen}
-          />
+            <MemoNavItem
+              to="/reports/SaleReturnReport"
+              icon={<RotateCcw size={17} />}
+              label="Sale Return"
+              setOpen={setOpen}
+            />
 
-          <NavItem
-            to="/reports/PurchaseReport"
-            icon={<ShoppingCart size={18} />}
-            label="Purchase Report"
-            setOpen={setOpen}
-          />
+            <MemoNavItem
+              to="/reports/PurchaseReport"
+              icon={<ShoppingCart size={17} />}
+              label="Purchase Report"
+              setOpen={setOpen}
+            />
 
-          <NavItem
-            to="/reports/PurchaseReturnReport"
-            icon={<Undo2 size={18} />}
-            label="Purchase Return"
-            setOpen={setOpen}
-          />
+            <MemoNavItem
+              to="/reports/PurchaseReturnReport"
+              icon={<Undo2 size={17} />}
+              label="Purchase Return"
+              setOpen={setOpen}
+            />
 
-          <NavItem
-            to="/reports/gross"
-            icon={<TrendingUp size={18} />}
-            label="Gross Profit"
-            setOpen={setOpen}
-          />
+            <MemoNavItem
+              to="/reports/gross"
+              icon={<TrendingUp size={17} />}
+              label="Gross Profit"
+              setOpen={setOpen}
+            />
+          </MemoDropdown>
+
+          {/* REOPENS */}
+          <MemoDropdown
+            title="Reopens"
+            icon={<FolderOpen size={16} />}
+            open={
+              openSections.reopens
+            }
+            onToggle={() =>
+              toggleSection(
+                "reopens"
+              )
+            }
+          >
+
+            <MemoNavItem
+              to="/reopens/UnloadingBills"
+              icon={<RotateCcw size={17} />}
+              label="Unloading Bills"
+              setOpen={setOpen}
+            />
+          </MemoDropdown>
 
         </nav>
 
@@ -287,57 +375,9 @@ export default function Sidebar({ open, setOpen }) {
             border-gray-100
             dark:border-slate-800
 
-            bg-white
-            dark:bg-slate-950
-
-            space-y-3
+            shrink-0
           "
         >
-
-          {/* THEME BUTTON 
-          <button
-            onClick={toggleTheme}
-            className="
-              w-full
-
-              flex items-center justify-center gap-2
-
-              py-3
-              rounded-2xl
-
-              text-sm
-              font-bold
-
-              border
-
-              border-gray-200
-              dark:border-slate-700
-
-              bg-gray-50
-              dark:bg-slate-900
-
-              text-slate-700
-              dark:text-yellow-300
-
-              hover:bg-gray-100
-              dark:hover:bg-slate-800
-
-              transition-all
-            "
-          >
-
-            {theme === "dark"
-              ? <Sun size={18} />
-              : <Moon size={18} />
-            }
-
-            <span>
-              {theme === "dark"
-                ? "Light Mode"
-                : "Dark Mode"}
-            </span>
-
-          </button> */}
 
           {/* LOGOUT */}
           <button
@@ -362,16 +402,18 @@ export default function Sidebar({ open, setOpen }) {
               shadow-lg
               shadow-red-500/20
 
-              hover:scale-[1.01]
-              active:scale-[0.98]
+              hover:opacity-95
+              active:scale-[0.99]
 
               transition-all
             "
           >
             <LogOut size={16} />
-            <span>Logout</span>
-          </button>
 
+            <span>
+              Logout
+            </span>
+          </button>
         </div>
 
       </aside>
@@ -379,44 +421,139 @@ export default function Sidebar({ open, setOpen }) {
   );
 }
 
-/* SECTION TITLE */
-function SectionTitle({ title }) {
+/* =========================
+   DROPDOWN
+========================= */
+
+const DropdownSection = ({
+  title,
+  icon,
+  children,
+  open,
+  onToggle,
+}) => {
 
   return (
-    <div className="px-3 pt-3 pb-1">
 
-      <p
+    <div className="space-y-1">
+
+      {/* HEADER */}
+      <button
+        onClick={onToggle}
         className="
-          text-[10px]
-          uppercase
-          tracking-[0.18em]
+          w-full
 
-          text-slate-400
-          dark:text-slate-500
+          flex items-center justify-between
 
-          font-black
+          px-3 py-3
+
+          rounded-2xl
+
+          bg-gray-50
+          dark:bg-slate-900
+
+          border
+          border-gray-200
+          dark:border-slate-800
+
+          hover:bg-gray-100
+          dark:hover:bg-slate-800
+
+          transition-colors
         "
       >
-        {title}
-      </p>
 
+        <div className="flex items-center gap-2">
+
+          <div className="text-indigo-500">
+            {icon}
+          </div>
+
+          <span
+            className="
+              text-[12px]
+              uppercase
+              tracking-[0.14em]
+              font-black
+
+              text-slate-700
+              dark:text-slate-200
+            "
+          >
+            {title}
+          </span>
+        </div>
+
+        <ChevronDown
+          size={16}
+          className={`
+            transition-transform
+            duration-200
+
+            ${open
+              ? "rotate-180"
+              : ""
+            }
+          `}
+        />
+      </button>
+
+      {/* BODY */}
+      <div
+        className={`
+          overflow-hidden
+
+          transition-all
+          duration-200
+
+          ${open
+            ? `
+              max-h-[500px]
+              opacity-100
+            `
+            : `
+              max-h-0
+              opacity-0
+            `
+          }
+        `}
+      >
+
+        <div className="space-y-1 pt-1 pl-2">
+
+          {children}
+
+        </div>
+      </div>
     </div>
   );
-}
+};
 
-/* NAV ITEM */
-function NavItem({
+const MemoDropdown =
+  memo(
+    DropdownSection
+  );
+
+/* =========================
+   NAV ITEM
+========================= */
+
+const NavItem = ({
   to,
   icon,
   label,
   setOpen,
-}) {
+}) => {
 
   return (
     <NavLink
       to={to}
-      onClick={() => setOpen(false)}
-      className={({ isActive }) =>
+      onClick={() =>
+        setOpen(false)
+      }
+      className={({
+        isActive,
+      }) =>
         `
           group
 
@@ -429,30 +566,26 @@ function NavItem({
           text-sm
           font-semibold
 
-          transition-all duration-200
+          transition-colors
 
-          ${
-            isActive
-              ? `
-                bg-gradient-to-r
-                from-blue-500
-                to-indigo-600
+          ${isActive
+            ? `
+              bg-gradient-to-r
+              from-blue-500
+              to-indigo-600
 
-                text-white
+              text-white
 
-                shadow-lg
-                shadow-blue-500/20
-              `
-              : `
-                text-slate-600
-                dark:text-slate-300
+              shadow-md
+              shadow-blue-500/20
+            `
+            : `
+              text-slate-600
+              dark:text-slate-300
 
-                hover:bg-slate-100
-                dark:hover:bg-slate-800
-
-                hover:text-slate-900
-                dark:hover:text-white
-              `
+              hover:bg-slate-100
+              dark:hover:bg-slate-800
+            `
           }
         `
       }
@@ -467,7 +600,6 @@ function NavItem({
         <span className="truncate">
           {label}
         </span>
-
       </div>
 
       <ChevronRight
@@ -475,10 +607,13 @@ function NavItem({
         className="
           opacity-40
           group-hover:translate-x-0.5
-          transition-all
+
+          transition-transform
         "
       />
-
     </NavLink>
   );
-}
+};
+
+const MemoNavItem =
+  memo(NavItem);

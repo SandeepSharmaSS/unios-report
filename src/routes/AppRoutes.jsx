@@ -12,7 +12,7 @@ import STNReport from "../pages/reports/STNReport";
 import SalereturnReport from "../pages/reports/SaleReturnReport";
 import PurchaseReport from "../pages/reports/PurchaseReport";
 import PurchaseReturnReport from "../pages/reports/PurchaseReturnReport";
-
+import UnloadingBills from "../pages/reopens/UnloadingBills";
 
 import MainLayout from "../layouts/MainLayout";
 const ProtectedRoute = () => {
@@ -48,6 +48,7 @@ export default function AppRoutes() {
         <Route path="/reports/PurchaseReport" element={<PurchaseReport/>}/>
         <Route path="/reports/PurchaseReturnReport" element={<PurchaseReturnReport/>}/>
         <Route path="/reports/NonMoving" element={<NonMovingStock/>}/>
+        <Route path="/reopens/UnloadingBills" element={<UnloadingBills/>}/>
       </Route>
 
       {/* ===== FALLBACK ===== */}

@@ -592,3 +592,46 @@ export const ledgerSearch = async (ledgerName = "") => {
 
   return res.data;
 };
+
+
+// AB yaha se Reopen bills ke liye service
+
+// Unloading Search API (CSA wise)
+export const getUnloadingSearch = async (
+  searchString = "",
+  csaId,
+  signal) => {
+  const res = await axios.post(
+    `${apiUrl2}/warehouse/unloading-search`,
+    {
+      SearchString: searchString,
+      csa_id: csaId,
+    },
+    {
+      headers: getHeaders(),
+      signal,
+    }
+  );
+
+  return res.data;
+};
+
+// Unloading reopen bill function
+export const reopenBills = async (
+  docNo,
+  type = "Unloading"
+) => {
+
+  const res = await axios.post(
+    `${apiUrl2}/support/reopen-bills`,
+    {
+      DocNo: docNo,
+      type: type,
+    },
+    {
+      headers: getHeaders(),
+    }
+  );
+
+  return res.data;
+};
