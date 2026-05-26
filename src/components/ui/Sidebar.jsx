@@ -17,12 +17,14 @@ import {
   ChevronDown,
   X,
   FolderOpen,
-  RotateCwIcon,
-  RotateCcwSquare,
-  RotateCcwSquareIcon,
-  Rotate3DIcon,
-  RocketIcon,
+  FileText,
+  ShoppingCart,
+  Undo2,
+  Truck,
+  CornerUpLeft,
+  ClipboardList,
 } from "lucide-react";
+
 
 import {
   useState,
@@ -32,19 +34,11 @@ import {
 } from "react";
 
 import { useAuth } from "../../context/AuthContext";
-
 import { useTheme } from "../../context/ThemeContext";
-
-export default function Sidebar({
-  open,
-  setOpen,
-}) {
+export default function Sidebar({open, setOpen,}){
 
   const { logout } = useAuth();
-
   const { theme } = useTheme();
-
-  // 🔥 smoother dropdown state
   const [
     openSections,
     setOpenSections,
