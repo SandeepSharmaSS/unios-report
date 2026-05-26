@@ -352,66 +352,54 @@ export default function Sidebar({open, setOpen,}){
             }
           >
 
-{/* REOPENS */}
-<MemoDropdown
-  title="Reopens"
-  icon={<FolderOpen size={16} />}
-  open={openSections.reopens}
-  onToggle={() =>
-    toggleSection("reopens")
-  }
->
+            <MemoNavItem
+              to="/reopens/UnloadingBills"
+              icon={<Package size={17} />}
+              label="Unloading Bills"
+              setOpen={setOpen}
+            />
 
-  <MemoNavItem
-    to="/reopens/UnloadingBills"
-    icon={<Package size={17} />}
-    label="Unloading Bills"
-    setOpen={setOpen}
-  />
+            <MemoNavItem
+              to="/reopens/SaleInvoiceBills"
+              icon={<FileText size={17} />}
+              label="Sale Invoice Bills"
+              setOpen={setOpen}
+            />
 
-  <MemoNavItem
-    to="/reopens/SaleInvoiceBills"
-    icon={<FileText size={17} />}
-    label="Sale Invoice Bills"
-    setOpen={setOpen}
-  />
+            <MemoNavItem
+              to="/reopens/SaleOrderBills"
+              icon={<ShoppingCart size={17} />}
+              label="Sale Order Bills"
+              setOpen={setOpen}
+            />
 
-  <MemoNavItem
-    to="/reopens/SaleOrderBills"
-    icon={<ShoppingCart size={17} />}
-    label="Sale Order Bills"
-    setOpen={setOpen}
-  />
+            <MemoNavItem
+              to="/reopens/SaleReturnBills"
+              icon={<Undo2 size={17} />}
+              label="Sale Return Bills"
+              setOpen={setOpen}
+            />
 
-  <MemoNavItem
-    to="/reopens/SaleReturnBills"
-    icon={<Undo2 size={17} />}
-    label="Sale Return Bills"
-    setOpen={setOpen}
-  />
+            <MemoNavItem
+              to="/reopens/StnInvoiceBills"
+              icon={<Truck size={17} />}
+              label="STN Bills"
+              setOpen={setOpen}
+            />
 
-  <MemoNavItem
-    to="/reopens/StnInvoiceBills"
-    icon={<Truck size={17} />}
-    label="STN Bills"
-    setOpen={setOpen}
-  />
+            <MemoNavItem
+              to="/reopens/PurchaseReturnBills"
+              icon={<CornerUpLeft size={17} />}
+              label="Purchase Return Bills"
+              setOpen={setOpen}
+            />
 
-  <MemoNavItem
-    to="/reopens/PurchaseReturnBills"
-    icon={<CornerUpLeft size={17} />}
-    label="Purchase Return Bills"
-    setOpen={setOpen}
-  />
-
-  <MemoNavItem
-    to="/reopens/PurchaseOrderBills"
-    icon={<ClipboardList size={17} />}
-    label="Purchase Order Bills"
-    setOpen={setOpen}
-  />
-
-</MemoDropdown>
+            <MemoNavItem
+              to="/reopens/PurchaseOrderBills"
+              icon={<ClipboardList size={17} />}
+              label="Purchase Order Bills"
+              setOpen={setOpen}
+            />
 
           </MemoDropdown>
 
