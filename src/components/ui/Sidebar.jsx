@@ -363,49 +363,49 @@ export default function Sidebar({
 
             <MemoNavItem
               to="/reopens/UnloadingBills"
-              icon={<RotateCcw size={17} />}
+              icon={<PackageOpen size={17} />}
               label="Unloading Bills"
               setOpen={setOpen}
             />
 
             <MemoNavItem 
             to="/reopens/SaleInvoiceBills"
-            icon={<RotateCwIcon size={17}/>}
+            icon={<FileText size={17}/>}
             label="Sale Invoice Bills"
             setOpen={setOpen}
             />
 
             <MemoNavItem
             to="/reopens/SaleOrderBills"
-            icon={<RotateCcwSquare size={17}/>}
+            icon={<ShoppingCart size={17}/>}
             label="Sale Order Bills"
             setOpen={setOpen}
             />
 
             <MemoNavItem
             to="/reopens/SaleReturnBills"
-            icon={<RotateCcwSquareIcon size={17}/>}
+            icon={<Undo2 size={17}/>}
             label="Sale Return Bills"
             setOpen={setOpen}
             />
 
             <MemoNavItem
             to="/reopens/StnInvoiceBills"
-            icon={<Rotate3DIcon size={17}/>}
+            icon={<Truck size={17}/>}
             label="STN Bills"
             setOpen={setOpen}
             />
 
             <MemoNavItem
             to="/reopens/PurchaseReturnBills"
-            icon={<RocketIcon size={17}/>}
+            icon={<CornerUpLeft size={17}/>}
             label="Purchase Return Bills"
             setOpen={setOpen}
             />
 
             <MemoNavItem
             to="/reopens/PurchaseOrderBills"
-            icon={<RotateCcwSquareIcon size={17}/>}
+            icon={<ClipboardList size={17}/>}
             label="Purchase Order Bills"
             setOpen={setOpen}
             />
