@@ -338,7 +338,7 @@ export default function Sidebar({open, setOpen,}){
             />
           </MemoDropdown>
 
-          {/* REOPENS */}
+          {/* REOPENS 
           <MemoDropdown
             title="Reopens"
             icon={<FolderOpen size={16} />}
@@ -401,7 +401,7 @@ export default function Sidebar({open, setOpen,}){
               setOpen={setOpen}
             />
 
-          </MemoDropdown>
+          </MemoDropdown>*/}
 
         </nav>
 
