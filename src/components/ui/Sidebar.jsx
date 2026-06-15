@@ -34,8 +34,30 @@ import { useAuth } from "../../context/AuthContext";
 import { useTheme } from "../../context/ThemeContext";
 export default function Sidebar({open, setOpen,}){
 
-  const { logout } = useAuth();
-  const { theme } = useTheme();
+const { logout } = useAuth();
+
+const token = localStorage.getItem("token");
+
+let userEmail = "";
+
+try {
+  if (token) {
+    const payload = JSON.parse(
+      atob(token.split(".")[1])
+    );
+
+    userEmail = payload.mobile || "";
+  }
+} catch (err) {
+  console.log(err);
+}
+
+const canViewReopens =
+  userEmail.toLowerCase() ===
+  "sandeep20ryan@gmail.com";
+
+const { theme } = useTheme();
+
   const [
     openSections,
     setOpenSections,
@@ -338,7 +360,7 @@ export default function Sidebar({open, setOpen,}){
             />
           </MemoDropdown>
 
-          {/* REOPENS 
+          {/* REOPENS */}
           <MemoDropdown
             title="Reopens"
             icon={<FolderOpen size={16} />}
@@ -401,7 +423,7 @@ export default function Sidebar({open, setOpen,}){
               setOpen={setOpen}
             />
 
-          </MemoDropdown>*/}
+          </MemoDropdown>
 
         </nav>
 
