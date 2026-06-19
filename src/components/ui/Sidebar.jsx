@@ -361,7 +361,7 @@ const { theme } = useTheme();
           </MemoDropdown>
 
           {/* REOPENS */}
-{canViewReopens && (
+{/*{canViewReopens && (
   <MemoDropdown
     title="Reopens"
     icon={<FolderOpen size={16} />}
@@ -425,7 +425,7 @@ const { theme } = useTheme();
     />
 
   </MemoDropdown>
-)}
+)}*/}
 
         </nav>
 
